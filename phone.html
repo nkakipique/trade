@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Directory Table</title>
+    <style>
+        body {
+            background-color: #4f7b8d87;
+            /* Set your desired background color here */
+            font-family: Arial, sans-serif;
+            /* Set your desired font family */
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #45424265;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f904;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        #pagination {
+            margin-top: 10px;
+        }
+
+        #pagination a {
+            display: inline-block;
+            padding: 8px;
+            margin-right: 5px;
+            background-color: #f2f2f2;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #939292;
+        }
+
+        #pagination a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Directory Information</h1>
+    <input type="text" id="searchInput" placeholder="Search...">
+    <table id="directoryTable">
+        <thead>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Number</th>
+                <th>Department</th>
+                <th>Location</th>
+                <th>Directory Name</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div id="pagination"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inline JSON data
+            var jsonData = [
+                {
+                    "Last Name": "",
+                    "First Name": "",
+                    "Number": "201",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": ""
+                },
+                {
+                    "Last Name": "Switchboard",
+                    "First Name": "Line 2",
+                    "Number": "202",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Switchboard,Line 2\""
+                },
+                {
+                    "Last Name": "Motswagae",
+                    "First Name": "Tebo",
+                    "Number": "203",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Motswagae,Tebo\""
+                },
+                {
+                    "Last Name": "Gaborone",
+                    "First Name": "Lebogang",
+                    "Number": "204",
+                    "Department": "DCS",
+                    "Location": "3rd Floor 313",
+                    "Directory Name": "Gaborone"
+                },
+                {
+                    "Last Name": "Molaodi",
+                    "First Name": "Theresa",
+                    "Number": "205",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Molaodi,Theresa\""
+                },
+                {
+                    "Last Name": "Mpesi",
+                    "First Name": "Selinah",
+                    "Number": "206",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Dithapelo G"
+                },
+                {
+                    "Last Name": "Basement Security",
+                    "First Name": "",
+                    "Number": "207",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "Basement Security"
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "",
+                    "Number": "208",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": ""
+                },
+                {
+                    "Last Name": "Sekgopa",
+                    "First Name": "Ndiyane",
+                    "Number": "209",
+                    "Department": "PR",
+                    "Location": "3rd Floor",
+                    "Directory Name": "\"Sekgopa,Ndiyane\""
+                },
+                {
+                    "Last Name": "MOROLONG/PAKO",
+                    "First Name": "",
+                    "Number": "210",
+                    "Department": "DCS",
+                    "Location": "MITI-CBD",
+                    "Directory Name": "MOROLONG/PAKO"
+                },
+                {
+                    "Last Name": "Moarabi Kebeetsweng",
+                    "First Name": "",
+                    "Number": "211",
+                    "Department": "DCS",
+                    "Location": "\"Machine Room, Floor 4\"",
+                    "Directory Name": "Moarabi Kebeetsweng"
+                },
+                {
+                    "Last Name": "Oaitse Modiakgotla",
+                    "First Name": "",
+                    "Number": "212",
+                    "Department": "DCS-EDD",
+                    "Location": "Floor 2-EDD",
+                    "Directory Name": "Oaitse Modiakgotla"
+                },
+                {
+                    "Last Name": "Neo",
+                    "First Name": "Valentine",
+                    "Number": "213",
+                    "Department": "DCS",
+                    "Location": "\"Office 430, Floor 4\"",
+                    "Directory Name": "Valentine Neo"
+                },
+                {
+                    "Last Name": "Tizhane",
+                    "First Name": "Mogolodi",
+                    "Number": "215",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "Mogolodi Tizhane"
+                },
+                {
+                    "Last Name": "Kalanke",
+                    "First Name": "Godfrey",
+                    "Number": "216",
+                    "Department": "DCS",
+                    "Location": "3rd Floor Admin",
+                    "Directory Name": "\"Kalanke,Godfrey\""
+                },
+                {
+                    "Last Name": "Manake",
+                    "First Name": "Fredrick",
+                    "Number": "217",
+                    "Department": "DCS",
+                    "Location": "3rd Floor",
+                    "Directory Name": "\"Manake,Fredrick\""
+                },
+                {
+                    "Last Name": "C Tjituka",
+                    "First Name": "",
+                    "Number": "218",
+                    "Department": "DCS",
+                    "Location": "Floor 4",
+                    "Directory Name": "L Pheto"
+                },
+                {
+                    "Last Name": "Molebo",
+                    "First Name": "O",
+                    "Number": "219",
+                    "Department": "DCS-HRM",
+                    "Location": "\"Floor 4, Office 435\"",
+                    "Directory Name": "O. Molebo"
+                },
+                {
+                    "Last Name": "Ramodimoosi",
+                    "First Name": "Kedibonye",
+                    "Number": "220",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "3rd Floor Kitchen"
+                },
+                {
+                    "Last Name": "EDD Kitchen",
+                    "First Name": "",
+                    "Number": "221",
+                    "Department": "DCS-EDD",
+                    "Location": "\"Floor 2, Kitchen\"",
+                    "Directory Name": "EDD Kitchen"
+                },
+                {
+                    "Last Name": "Boleseng",
+                    "First Name": "Nametsegang",
+                    "Number": "222",
+                    "Department": "DCS",
+                    "Location": "Procurement floor2",
+                    "Directory Name": "Nametsegang Boleseng"
+                },
+                {
+                    "Last Name": "Keitumetse",
+                    "First Name": "Diraditsile",
+                    "Number": "223",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"Keitumetse,Diraditsil\""
+                },
+                {
+                    "Last Name": "Masingwa",
+                    "First Name": "Otshotswe",
+                    "Number": "224",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "\"Masingwa,Otshotswe\""
+                },
+                {
+                    "Last Name": "RMU Confidential",
+                    "First Name": "",
+                    "Number": "225",
+                    "Department": "DCS-RMU",
+                    "Location": "\"Office 438,Floor 3\"",
+                    "Directory Name": "RMU Confidential"
+                },
+                {
+                    "Last Name": "Kaisara",
+                    "First Name": "Luka",
+                    "Number": "226",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "Luka Audit"
+                },
+                {
+                    "Last Name": "Manake",
+                    "First Name": "Beauty",
+                    "Number": "227",
+                    "Department": "Ass Minister",
+                    "Location": "",
+                    "Directory Name": "Beauty Manake"
+                },
+                {
+                    "Last Name": "Ranthokwane",
+                    "First Name": "Kebabaletswe",
+                    "Number": "228",
+                    "Department": "EDD",
+                    "Location": "MTI",
+                    "Directory Name": "\"Ranthokwane,Kebabalet\""
+                },
+                {
+                    "Last Name": "Maphane",
+                    "First Name": "",
+                    "Number": "229",
+                    "Department": "DCS",
+                    "Location": "Ground floor north wing",
+                    "Directory Name": "Moanamisi Maphane"
+                },
+                {
+                    "Last Name": "Motlhabane",
+                    "First Name": "Thabo M",
+                    "Number": "230",
+                    "Department": "DCS",
+                    "Location": "312",
+                    "Directory Name": "Motlhabane Thabo"
+                },
+                {
+                    "Last Name": "Gatang",
+                    "First Name": "Daniel",
+                    "Number": "231",
+                    "Department": "DCS",
+                    "Location": "Procurement floor 2",
+                    "Directory Name": "Daniel Gatang"
+                },
+                {
+                    "Last Name": "Tebogo Motlogelwa",
+                    "First Name": "",
+                    "Number": "233",
+                    "Department": "DCS",
+                    "Location": "\"Office 301, Floor 3\"",
+                    "Directory Name": "Tebogo Motlogelwa"
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "",
+                    "Number": "234",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": ""
+                },
+                {
+                    "Last Name": "Dedede",
+                    "First Name": "Joyce",
+                    "Number": "235",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Dedede,Joyce\""
+                },
+                {
+                    "Last Name": "Badiredi Gabalebatse",
+                    "First Name": "",
+                    "Number": "236",
+                    "Department": "DCS",
+                    "Location": "\"Office 406, Floor 4\"",
+                    "Directory Name": "Badiredi Gabalebatse"
+                },
+                {
+                    "Last Name": "Matshediso Pule",
+                    "First Name": "",
+                    "Number": "238",
+                    "Department": "DCS",
+                    "Location": "\"Procurement, Floor2\"",
+                    "Directory Name": "Matshediso Pule"
+                },
+                {
+                    "Last Name": "Robert Kesiilwe",
+                    "First Name": "",
+                    "Number": "239",
+                    "Department": "DCS-EDD",
+                    "Location": "\"Office 211, Floor 2\"",
+                    "Directory Name": "Robert Kesiilwe"
+                },
+                {
+                    "Last Name": "Olebile Queen",
+                    "First Name": "",
+                    "Number": "240",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "Olebile Queen"
+                },
+                {
+                    "Last Name": "Senabye",
+                    "First Name": "Jeremiah",
+                    "Number": "241",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Jeremiah Senabye"
+                },
+                {
+                    "Last Name": "Molemi Tsheboeng",
+                    "First Name": "",
+                    "Number": "242",
+                    "Department": "DCS",
+                    "Location": "\"Officce 442, Floor 4\"",
+                    "Directory Name": "Molemi Tsheboeng"
+                },
+                {
+                    "Last Name": "Maun",
+                    "First Name": "DTCA",
+                    "Number": "243",
+                    "Department": "DTCA",
+                    "Location": "Maun",
+                    "Directory Name": "\"Maun,DTCA\""
+                },
+                {
+                    "Last Name": "MR SHIRIMA",
+                    "First Name": "",
+                    "Number": "244",
+                    "Department": "DCS",
+                    "Location": "\"Office 047, Ground Floor\"",
+                    "Directory Name": "MR SHIRIMA"
+                },
+                {
+                    "Last Name": "Makwape",
+                    "First Name": "Gabotlhapiwe",
+                    "Number": "245",
+                    "Department": "DCS",
+                    "Location": "DCS",
+                    "Directory Name": "Molefe Morape"
+                },
+                {
+                    "Last Name": "IT",
+                    "First Name": "Loyd",
+                    "Number": "246",
+                    "Department": "DCS",
+                    "Location": "Office 044 Ground Floor",
+                    "Directory Name": "Loyd IT"
+                },
+                {
+                    "Last Name": "Gadza",
+                    "First Name": "IT",
+                    "Number": "247",
+                    "Department": "",
+                    "Location": "DCS Ground 44",
+                    "Directory Name": "\"Gadza,IT\""
+                },
+                {
+                    "Last Name": "Gabaitsiwe",
+                    "First Name": "Segametsi",
+                    "Number": "248",
+                    "Department": "DCS-Operations",
+                    "Location": "\"Office 315, Floor 3\"",
+                    "Directory Name": "Gabaitsiwe Segametsi"
+                },
+                {
+                    "Last Name": "Resego Lesolame",
+                    "First Name": "",
+                    "Number": "249",
+                    "Department": "DCS-Procurement",
+                    "Location": "\"Office 171, floor 1\"",
+                    "Directory Name": "Resego Lesolame"
+                },
+                {
+                    "Last Name": "Boardroom",
+                    "First Name": "Executive",
+                    "Number": "250",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "\"Boardroom,Executive\""
+                },
+                {
+                    "Last Name": "Gotswakgosi",
+                    "First Name": "Kebonye",
+                    "Number": "251",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "Gotswakgosi Kebonye"
+                },
+                {
+                    "Last Name": "Masupe",
+                    "First Name": "Maipelo",
+                    "Number": "252",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "\"Masupe,Maipelo\""
+                },
+                {
+                    "Last Name": "Dira",
+                    "First Name": "Kefilwe",
+                    "Number": "253",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Dira,Kefilwe\""
+                },
+                {
+                    "Last Name": "Tapela",
+                    "First Name": "Thandie",
+                    "Number": "255",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Thandie Tapela"
+                },
+                {
+                    "Last Name": "Sebopeng",
+                    "First Name": "Mokgabo",
+                    "Number": "256",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "\"Sebopeng,Mokgabo\""
+                },
+                {
+                    "Last Name": "Relaeng",
+                    "First Name": "Mmoloki",
+                    "Number": "257",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "M Relaeng"
+                },
+                {
+                    "Last Name": "Mokgatlhe",
+                    "First Name": "N",
+                    "Number": "258",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"Mokgatlhe,N\""
+                },
+                {
+                    "Last Name": "Maswabi",
+                    "First Name": "Pretty J",
+                    "Number": "260",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Pretty J Maswabi"
+                },
+                {
+                    "Last Name": "Gakedirelwe",
+                    "First Name": "Goleba",
+                    "Number": "261",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Goleba Gakedirelwe"
+                },
+                {
+                    "Last Name": "Gumede",
+                    "First Name": "Mosa",
+                    "Number": "262",
+                    "Department": "DCS Legal",
+                    "Location": "MTI",
+                    "Directory Name": "Mosa Gumede"
+                },
+                {
+                    "Last Name": "Daniel Gatang",
+                    "First Name": "",
+                    "Number": "263",
+                    "Department": "DCS-Procurement",
+                    "Location": "\"Office 178, Floor 1\"",
+                    "Directory Name": "Daniel Gatang"
+                },
+                {
+                    "Last Name": "Motlogelwa",
+                    "First Name": "Tebogo",
+                    "Number": "264",
+                    "Department": "DCS",
+                    "Location": "\"Office 442, floor 4\"",
+                    "Directory Name": "\"Motlogelwa,Tebogo\""
+                },
+                {
+                    "Last Name": "Relations Unit",
+                    "First Name": "Public",
+                    "Number": "265",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Relations Unit,Public\""
+                },
+                {
+                    "Last Name": "Mpape",
+                    "First Name": "Ms",
+                    "Number": "266",
+                    "Department": "DCS",
+                    "Location": "EDD 2ND OFFICE 200",
+                    "Directory Name": "Mpape"
+                },
+                {
+                    "Last Name": "Kgotlane",
+                    "First Name": "Tona",
+                    "Number": "267",
+                    "Department": "Corporate Services",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"Kgotlane,Tona\""
+                },
+                {
+                    "Last Name": "Sheppyman",
+                    "First Name": "Modisi",
+                    "Number": "268",
+                    "Department": "DCS",
+                    "Location": "CBD-HQ",
+                    "Directory Name": "\"Sheppyman,Modisi\""
+                },
+                {
+                    "Last Name": "Batlhaedi Atamelang",
+                    "First Name": "",
+                    "Number": "269",
+                    "Department": "DCS-EDD",
+                    "Location": "Floor 2",
+                    "Directory Name": "Batlhaedi Atamelang"
+                },
+                {
+                    "Last Name": "Bowe",
+                    "First Name": "Matshelo G",
+                    "Number": "270",
+                    "Department": "DCS",
+                    "Location": "Finance-3rd Flr",
+                    "Directory Name": "Matshelo G Bowe"
+                },
+                {
+                    "Last Name": "Mosweu",
+                    "First Name": "Ella",
+                    "Number": "271",
+                    "Department": "EDD",
+                    "Location": "MTIHQ",
+                    "Directory Name": "\"Mosweu,Ella\""
+                },
+                {
+                    "Last Name": "Montebatsi",
+                    "First Name": "Gaone",
+                    "Number": "272",
+                    "Department": "DCS",
+                    "Location": "Acc- 3rd Flr",
+                    "Directory Name": "\"Montebatsi,Gaone\""
+                },
+                {
+                    "Last Name": "Lebengwa",
+                    "First Name": "Fatimah",
+                    "Number": "273",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Lebengwa,Fatimah\""
+                },
+                {
+                    "Last Name": "Mogami Malebye",
+                    "First Name": "",
+                    "Number": "274",
+                    "Department": "DCS",
+                    "Location": "\"Office 322, Floor 3\"",
+                    "Directory Name": "Mogami Malebye"
+                },
+                {
+                    "Last Name": "Madise",
+                    "First Name": "Olerato",
+                    "Number": "275",
+                    "Department": "DCS 3rd Floor",
+                    "Location": "",
+                    "Directory Name": "\"Senwelo,Winner\""
+                },
+                {
+                    "Last Name": "Ramogola",
+                    "First Name": "Thuso",
+                    "Number": "276",
+                    "Department": "DCS",
+                    "Location": "MTIHQ",
+                    "Directory Name": "\"Ramogola,Thuso\""
+                },
+                {
+                    "Last Name": "TYPING POOL",
+                    "First Name": "",
+                    "Number": "277",
+                    "Department": "DCS",
+                    "Location": "Floor 3",
+                    "Directory Name": "TYPING POOL"
+                },
+                {
+                    "Last Name": "TRANSPORT",
+                    "First Name": "",
+                    "Number": "278",
+                    "Department": "DCS",
+                    "Location": "TRANSPORT",
+                    "Directory Name": "TRANSPORT"
+                },
+                {
+                    "Last Name": "Mogorosi",
+                    "First Name": "Mpule",
+                    "Number": "279",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Mpule Mogorosi"
+                },
+                {
+                    "Last Name": "Mothupi",
+                    "First Name": "Kebonyemodisa R",
+                    "Number": "280",
+                    "Department": "DCS",
+                    "Location": "MITI Ground Floor",
+                    "Directory Name": "Mothupi K R"
+                },
+                {
+                    "Last Name": "Masingwa Otshotswe",
+                    "First Name": "",
+                    "Number": "281",
+                    "Department": "DCS-Admin Account",
+                    "Location": "Floor 3",
+                    "Directory Name": "Masingwa Otshotswe"
+                },
+                {
+                    "Last Name": "Sento",
+                    "First Name": "Gojadilwe",
+                    "Number": "282",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Gojadilwe Sento"
+                },
+                {
+                    "Last Name": "Admin Accounts",
+                    "First Name": "",
+                    "Number": "283",
+                    "Department": "Admin Acc",
+                    "Location": "3rd Flr",
+                    "Directory Name": "Admin Accounts"
+                },
+                {
+                    "Last Name": "Patience Tsheko",
+                    "First Name": "",
+                    "Number": "284",
+                    "Department": "DCS",
+                    "Location": "MTC-3rd Flr",
+                    "Directory Name": "Patience Tsheko"
+                },
+                {
+                    "Last Name": "Patricia Boloko",
+                    "First Name": "",
+                    "Number": "285",
+                    "Department": "DCS",
+                    "Location": "4th Floor",
+                    "Directory Name": "Patricia Boloko"
+                },
+                {
+                    "Last Name": "Montoka Makwaeba",
+                    "First Name": "",
+                    "Number": "286",
+                    "Department": "DCS",
+                    "Location": "\"Office 406, Floor 4\"",
+                    "Directory Name": "Montoka Makwaeba"
+                },
+                {
+                    "Last Name": "Messengers",
+                    "First Name": "",
+                    "Number": "287",
+                    "Department": "DCS",
+                    "Location": "4th Floor",
+                    "Directory Name": "Messengers"
+                },
+                {
+                    "Last Name": "Kgosisejo",
+                    "First Name": "M",
+                    "Number": "288",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "M Kgosisejo"
+                },
+                {
+                    "Last Name": "Kgalemang",
+                    "First Name": "Nora",
+                    "Number": "289",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "\"Kgalemang,Nora\""
+                },
+                {
+                    "Last Name": "Mpejane",
+                    "First Name": "Kgolagano",
+                    "Number": "290",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Kgolagano Mpejane"
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "DPS_I",
+                    "Number": "291",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "DPS_I"
+                },
+                {
+                    "Last Name": "Mmolawa",
+                    "First Name": "Gideon",
+                    "Number": "292",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Mmolawa,Gideon\""
+                },
+                {
+                    "Last Name": "Kgafela",
+                    "First Name": "Mmusi",
+                    "Number": "293",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "Hon Minister"
+                },
+                {
+                    "Last Name": "Madisa",
+                    "First Name": "Ellen Richard",
+                    "Number": "294",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "Ellen Richard-Madisa"
+                },
+                {
+                    "Last Name": "Maun",
+                    "First Name": "DCD",
+                    "Number": "295",
+                    "Department": "DCD",
+                    "Location": "Maun",
+                    "Directory Name": "\"Maun,DCD\""
+                },
+                {
+                    "Last Name": "Ramontsho",
+                    "First Name": "Tshepho",
+                    "Number": "296",
+                    "Department": "DCS",
+                    "Location": "DCS- Transport",
+                    "Directory Name": "Transport DCS"
+                },
+                {
+                    "Last Name": "Butale",
+                    "First Name": "Phazha",
+                    "Number": "297",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Butale,Phazha\""
+                },
+                {
+                    "Last Name": "Modise",
+                    "First Name": "Patricia",
+                    "Number": "298",
+                    "Department": "DCS-EDD",
+                    "Location": "Office 202",
+                    "Directory Name": "Gorata Moloise"
+                },
+                {
+                    "Last Name": "Polly Lucas",
+                    "First Name": "",
+                    "Number": "299",
+                    "Department": "EDD",
+                    "Location": "\"Office 200, Floor 2\"",
+                    "Directory Name": "Polly Lucas"
+                },
+                {
+                    "Last Name": "RMU",
+                    "First Name": "",
+                    "Number": "302",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "RMU"
+                },
+                {
+                    "Last Name": "Kagiso Thuma",
+                    "First Name": "",
+                    "Number": "303",
+                    "Department": "HRM",
+                    "Location": "\"Floor 3, Office 313\"",
+                    "Directory Name": "Kagiso Thuma"
+                },
+                {
+                    "Last Name": "Labourer",
+                    "First Name": "",
+                    "Number": "304",
+                    "Department": "DCS-Labourer",
+                    "Location": "Floor 3",
+                    "Directory Name": "Labourer"
+                },
+                {
+                    "Last Name": "Consultants",
+                    "First Name": "Dwms",
+                    "Number": "307",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Consultants,Dwms\""
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "",
+                    "Number": "308",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": ""
+                },
+                {
+                    "Last Name": "Kenole Molaolwa",
+                    "First Name": "",
+                    "Number": "309",
+                    "Department": "DCS",
+                    "Location": "\"Office 420, Floor 4\"",
+                    "Directory Name": "Kenole Molaolwa"
+                },
+                {
+                    "Last Name": "Mosienyane",
+                    "First Name": "Bogadi",
+                    "Number": "310",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "\"Mosienyane,Bogadi\""
+                },
+                {
+                    "Last Name": "Pako IT",
+                    "First Name": "",
+                    "Number": "311",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "Pako IT"
+                },
+                {
+                    "Last Name": "Tsomele",
+                    "First Name": "Tsholofelo",
+                    "Number": "312",
+                    "Department": "Planning Unit",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Tsomele,Tsholofelo\""
+                },
+                {
+                    "Last Name": "Teemane",
+                    "First Name": "Segomotso",
+                    "Number": "313",
+                    "Department": "DCS",
+                    "Location": "Floor 4",
+                    "Directory Name": "Segomotso Teemane"
+                },
+                {
+                    "Last Name": "Sinvula",
+                    "First Name": "Letso",
+                    "Number": "314",
+                    "Department": "DCS",
+                    "Location": "MITI HQ",
+                    "Directory Name": "Letso Sinvula"
+                },
+                {
+                    "Last Name": "Sedie",
+                    "First Name": "Zenzile",
+                    "Number": "315",
+                    "Department": "DCS",
+                    "Location": "\"Office 429, Floor 4\"",
+                    "Directory Name": "Zenzile Sedie"
+                },
+                {
+                    "Last Name": "Mpho Kgosidintsi",
+                    "First Name": "",
+                    "Number": "316",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "Mpho Kgosidintsi"
+                },
+                {
+                    "Last Name": "Mukamambo",
+                    "First Name": "Shirley",
+                    "Number": "318",
+                    "Department": "DCS",
+                    "Location": "PRU Ground floor",
+                    "Directory Name": "Shirley Mukamambo"
+                },
+                {
+                    "Last Name": "Bonolo H",
+                    "First Name": "Dipholo",
+                    "Number": "319",
+                    "Department": "DCS",
+                    "Location": "Floor 3",
+                    "Directory Name": "B H Dipholo"
+                },
+                {
+                    "Last Name": "S Rabuti",
+                    "First Name": "",
+                    "Number": "320",
+                    "Department": "DCS",
+                    "Location": "DCS",
+                    "Directory Name": "Ellen Galetshetse"
+                },
+                {
+                    "Last Name": "Sola",
+                    "First Name": "Regina",
+                    "Number": "321",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "\"Sola,Regina\""
+                },
+                {
+                    "Last Name": "Batsho Makobole",
+                    "First Name": "",
+                    "Number": "322",
+                    "Department": "DCS",
+                    "Location": "\"Office 423, Floor 4\"",
+                    "Directory Name": "Batsho Makobole"
+                },
+                {
+                    "Last Name": "Dr Sentsho",
+                    "First Name": "Joel",
+                    "Number": "323",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "\"Dr Sentsho,Joel\""
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "",
+                    "Number": "324",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": ""
+                },
+                {
+                    "Last Name": "Molefe",
+                    "First Name": "Maria",
+                    "Number": "325",
+                    "Department": "DCS",
+                    "Location": "Acc- 3rd Flr",
+                    "Directory Name": "\"Molefe,Maria\""
+                },
+                {
+                    "Last Name": "Tau",
+                    "First Name": "Florie",
+                    "Number": "326",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "\"Tau,Florie\""
+                },
+                {
+                    "Last Name": "Monnanoka",
+                    "First Name": "Donald",
+                    "Number": "327",
+                    "Department": "DCS",
+                    "Location": "Acc-3rd Flr",
+                    "Directory Name": "Donald Monnanoka"
+                },
+                {
+                    "Last Name": "Mosabako",
+                    "First Name": "Lilian",
+                    "Number": "328",
+                    "Department": "EDD",
+                    "Location": "MTI",
+                    "Directory Name": "\"Mosabako,Lilian\""
+                },
+                {
+                    "Last Name": "Ntibinyane",
+                    "First Name": "Zibani",
+                    "Number": "329",
+                    "Department": "DCS-IT",
+                    "Location": "\"Office 046, Floor 0\"",
+                    "Directory Name": "Gaone /Zibani"
+                },
+                {
+                    "Last Name": "Phefo",
+                    "First Name": "Oarabile",
+                    "Number": "330",
+                    "Department": "DCS",
+                    "Location": "CPRO",
+                    "Directory Name": "Oarabile Phefo"
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "4th Floor Kitchen",
+                    "Number": "331",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "4th Floor Kitchen"
+                },
+                {
+                    "Last Name": "Keretsaone/Wendy",
+                    "First Name": "",
+                    "Number": "332",
+                    "Department": "EDD",
+                    "Location": "MITI HQ",
+                    "Directory Name": "Keretsaone/Wendy"
+                },
+                {
+                    "Last Name": "Sitang",
+                    "First Name": "Tidimalo",
+                    "Number": "333",
+                    "Department": "EDD",
+                    "Location": "2nd floor",
+                    "Directory Name": "\"Sitang,Tidimalo\""
+                },
+                {
+                    "Last Name": "Rakereng",
+                    "First Name": "Tshepo",
+                    "Number": "334",
+                    "Department": "DCS",
+                    "Location": "Acc - 3rd Flr",
+                    "Directory Name": "Tshepo Rakereng"
+                },
+                {
+                    "Last Name": "Phokele",
+                    "First Name": "Kelebogile",
+                    "Number": "336",
+                    "Department": "Procurement",
+                    "Location": "1st Floor",
+                    "Directory Name": "\"Phokele,Kelebogile\""
+                },
+                {
+                    "Last Name": "Leagajang",
+                    "First Name": "Innocent",
+                    "Number": "337",
+                    "Department": "PR",
+                    "Location": "Ground floor",
+                    "Directory Name": "\"Leagajang,Innocent\""
+                },
+                {
+                    "Last Name": "Connie Ralekoi",
+                    "First Name": "",
+                    "Number": "338",
+                    "Department": "DCS-Revenue",
+                    "Location": "\"Office 324, Floor 3\"",
+                    "Directory Name": "Revenue office"
+                },
+                {
+                    "Last Name": "TLHAGWANE",
+                    "First Name": "EMMANUEL",
+                    "Number": "340",
+                    "Department": "DCS",
+                    "Location": "MTI HQ",
+                    "Directory Name": "\"TLHAGWANE,EMMANUEL\""
+                },
+                {
+                    "Last Name": "DRIVERS-DCD",
+                    "First Name": "DRIVERS",
+                    "Number": "341",
+                    "Department": "DCD",
+                    "Location": "",
+                    "Directory Name": "DCD-DRIVERS"
+                },
+                {
+                    "Last Name": "Tshepiso Ntshese",
+                    "First Name": "",
+                    "Number": "342",
+                    "Department": "DCS",
+                    "Location": "\"Office 444, Floor4\"",
+                    "Directory Name": "Tshepiso Ntshese"
+                },
+                {
+                    "Last Name": "Mr. Tapeng",
+                    "First Name": "",
+                    "Number": "343",
+                    "Department": "Research",
+                    "Location": "Ground floor north wing",
+                    "Directory Name": "Mr. Tapeng"
+                },
+                {
+                    "Last Name": "O. Seane",
+                    "First Name": "",
+                    "Number": "344",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "O. Seane"
+                },
+                {
+                    "Last Name": "Gontse",
+                    "First Name": "Nonofo",
+                    "Number": "345",
+                    "Department": "DCS",
+                    "Location": "MTI",
+                    "Directory Name": "Gontse IT"
+                },
+                {
+                    "Last Name": "Bonang-Molamoledi",
+                    "First Name": "Gaone",
+                    "Number": "347",
+                    "Department": "Procument",
+                    "Location": "1st Floor",
+                    "Directory Name": "\"Bonang-Molamole,Gaone\""
+                },
+                {
+                    "Last Name": "Gotswakgosi",
+                    "First Name": "Kebonye",
+                    "Number": "348",
+                    "Department": "DCS",
+                    "Location": "MITI-CBD",
+                    "Directory Name": "Flora Dingalo"
+                },
+                {
+                    "Last Name": "Thulari",
+                    "First Name": "Thapelo",
+                    "Number": "349",
+                    "Department": "DCS",
+                    "Location": "Procurement floor 2",
+                    "Directory Name": "Thapelo Thulari"
+                },
+                {
+                    "Last Name": "Marumo",
+                    "First Name": "Janet",
+                    "Number": "350",
+                    "Department": "DCS",
+                    "Location": "CBD",
+                    "Directory Name": "\"Janet,Marumo\""
+                },
+                {
+                    "Last Name": "PR",
+                    "First Name": "UNIT",
+                    "Number": "351",
+                    "Department": "DCS",
+                    "Location": "Ground floor",
+                    "Directory Name": "PR UNIT"
+                },
+                {
+                    "Last Name": "Gora",
+                    "First Name": "Keamogetse",
+                    "Number": "352",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "\"Gora,Keamogetse\""
+                },
+                {
+                    "Last Name": "Call Centre",
+                    "First Name": "",
+                    "Number": "353",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "Call Centre"
+                },
+                {
+                    "Last Name": "Letlhakane",
+                    "First Name": "DCD",
+                    "Number": "355",
+                    "Department": "DCD",
+                    "Location": "Letlhakane",
+                    "Directory Name": "\"Letlhakane,DCD\""
+                },
+                {
+                    "Last Name": "JCIC eCO",
+                    "First Name": "TOURISM EXPECT",
+                    "Number": "356",
+                    "Department": "DCS",
+                    "Location": "MTIHQ",
+                    "Directory Name": "JCIC eCO TOURISM"
+                },
+                {
+                    "Last Name": "Tlhankane2",
+                    "First Name": "Taboka",
+                    "Number": "357",
+                    "Department": "DCS",
+                    "Location": "MITI-CBD",
+                    "Directory Name": "\"Tlhankane2,Taboka\""
+                },
+                {
+                    "Last Name": "RMU Confidential",
+                    "First Name": "",
+                    "Number": "358",
+                    "Department": "DCS-RMU",
+                    "Location": "\"Office, Floor 4\"",
+                    "Directory Name": "RMU Confidential"
+                },
+                {
+                    "Last Name": "Maphane",
+                    "First Name": "",
+                    "Number": "359",
+                    "Department": "DCS",
+                    "Location": "\"Floor 1, Library\"",
+                    "Directory Name": "Forbes"
+                },
+                {
+                    "Last Name": "Maapatsane",
+                    "First Name": "Kennedy",
+                    "Number": "360",
+                    "Department": "PR",
+                    "Location": "DBS",
+                    "Directory Name": "Kennedy"
+                },
+                {
+                    "Last Name": "Gaethusee Mpeba",
+                    "First Name": "",
+                    "Number": "361",
+                    "Department": "DCS",
+                    "Location": "Acc- 3rd Flr",
+                    "Directory Name": "Accounting Unit"
+                },
+                {
+                    "Last Name": "Wellness",
+                    "First Name": "",
+                    "Number": "362",
+                    "Department": "DCS-Wellness",
+                    "Location": "\"Floor3, Gym room\"",
+                    "Directory Name": "Wellness"
+                },
+                {
+                    "Last Name": "Katliso",
+                    "First Name": "",
+                    "Number": "363",
+                    "Department": "RESAERCH",
+                    "Location": "Groundflor office 079",
+                    "Directory Name": "K.Lesupi"
+                },
+                {
+                    "Last Name": "Pelekekae",
+                    "First Name": "Kelefang",
+                    "Number": "364",
+                    "Department": "Typing pool",
+                    "Location": "office 312",
+                    "Directory Name": "\"Pelekekae,Kelefang\""
+                },
+                {
+                    "Last Name": "Krish JCIC Project",
+                    "First Name": "Krish JCIC Project",
+                    "Number": "365",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "\"Krish JCIC Project,Kr\""
+                },
+                {
+                    "Last Name": "Kamanga",
+                    "First Name": "Merline",
+                    "Number": "366",
+                    "Department": "DCS-Audit",
+                    "Location": "Ground floor",
+                    "Directory Name": "\"Kamanga,Merline\""
+                },
+                {
+                    "Last Name": "Visagie",
+                    "First Name": "Johannes",
+                    "Number": "367",
+                    "Department": "DCS",
+                    "Location": "MITI HQ",
+                    "Directory Name": "\"Visagie,Johannes\""
+                },
+                {
+                    "Last Name": "Pule",
+                    "First Name": "Kefentse",
+                    "Number": "368",
+                    "Department": "DCS-Research Office",
+                    "Location": "Ground floor",
+                    "Directory Name": "K Garechaba"
+                },
+                {
+                    "Last Name": "Library 2",
+                    "First Name": "",
+                    "Number": "369",
+                    "Department": "DCS",
+                    "Location": "\"Floor 1, Library\"",
+                    "Directory Name": "Library 2"
+                },
+                {
+                    "Last Name": "RMU",
+                    "First Name": "Records",
+                    "Number": "370",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"RMU,Records\""
+                },
+                {
+                    "Last Name": "Segomelo",
+                    "First Name": "Nono",
+                    "Number": "371",
+                    "Department": "Gym office",
+                    "Location": "3rd Floor",
+                    "Directory Name": "\"Segomelo,Nono\""
+                },
+                {
+                    "Last Name": "Ontiretse",
+                    "First Name": "Thapelo",
+                    "Number": "372",
+                    "Department": "1st floor",
+                    "Location": "office 170",
+                    "Directory Name": "Ontiretse Kebitseope"
+                },
+                {
+                    "Last Name": "Strategy",
+                    "First Name": "",
+                    "Number": "374",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": "Strategy"
+                },
+                {
+                    "Last Name": "Ntaisi",
+                    "First Name": "Thapelo",
+                    "Number": "375",
+                    "Department": "Strategy",
+                    "Location": "Ground floor",
+                    "Directory Name": "\"Ntaisi,Thapelo\""
+                },
+                {
+                    "Last Name": "O. Lerubise",
+                    "First Name": "",
+                    "Number": "377",
+                    "Department": "EDD",
+                    "Location": "2nd floor",
+                    "Directory Name": "O. Lerubise"
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "",
+                    "Number": "378",
+                    "Department": "",
+                    "Location": "",
+                    "Directory Name": ""
+                },
+                {
+                    "Last Name": "Senwelo",
+                    "First Name": "Winner",
+                    "Number": "379",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Senwelo,Winner\""
+                },
+                {
+                    "Last Name": "Nortey",
+                    "First Name": "Selina",
+                    "Number": "381",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Nortey,Selina\""
+                },
+                {
+                    "Last Name": "Facilities Ofice",
+                    "First Name": "",
+                    "Number": "382",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "Facilities Ofice"
+                },
+                {
+                    "Last Name": "Bojang",
+                    "First Name": "B",
+                    "Number": "383",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Bojang,B\""
+                },
+                {
+                    "Last Name": "Library",
+                    "First Name": "",
+                    "Number": "384",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "Library 1"
+                },
+                {
+                    "Last Name": "Betha",
+                    "First Name": "Odirile",
+                    "Number": "385",
+                    "Department": "DCS-Strategy",
+                    "Location": "Office 411",
+                    "Directory Name": "\"Betha,Odirile\""
+                },
+                {
+                    "Last Name": "Monare",
+                    "First Name": "Seanokeng",
+                    "Number": "386",
+                    "Department": "DCS",
+                    "Location": "3rd Floor",
+                    "Directory Name": "\"Monare,Seanokeng\""
+                },
+                {
+                    "Last Name": "Kelaotswe",
+                    "First Name": "Pearl",
+                    "Number": "388",
+                    "Department": "EDD",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Kelaotswe,Pearl\""
+                },
+                {
+                    "Last Name": "Conference Room",
+                    "First Name": "3rdFloor",
+                    "Number": "389",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Conference Room,3rdFl\""
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "DOING BUSINESS",
+                    "Number": "390",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "DOING BUSINESS"
+                },
+                {
+                    "Last Name": "Operations",
+                    "First Name": "Chief",
+                    "Number": "391",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "Chief Operations"
+                },
+                {
+                    "Last Name": "Naledi",
+                    "First Name": "",
+                    "Number": "392",
+                    "Department": "DCS",
+                    "Location": "",
+                    "Directory Name": "Naledi"
+                },
+                {
+                    "Last Name": "Rapelane",
+                    "First Name": "Itseng",
+                    "Number": "393",
+                    "Department": "EDD",
+                    "Location": "MITI HQ",
+                    "Directory Name": "\"Rapelane,Itseng\""
+                },
+                {
+                    "Last Name": "Seemule",
+                    "First Name": "K",
+                    "Number": "394",
+                    "Department": "DCS-Legal",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "\"Seemule,K\""
+                },
+                {
+                    "Last Name": "Consultants",
+                    "First Name": "JCIC",
+                    "Number": "395",
+                    "Department": "Doing Business",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"Consultants,JCIC\""
+                },
+                {
+                    "Last Name": "Chaba",
+                    "First Name": "Pono",
+                    "Number": "396",
+                    "Department": "Accounting UNIT",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"Chaba,Pono\""
+                },
+                {
+                    "Last Name": "GROUND FLOOR",
+                    "First Name": "SECURITY",
+                    "Number": "397",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"Ground floor,North w\""
+                },
+                {
+                    "Last Name": "4TH FLOOR",
+                    "First Name": "SECURITY",
+                    "Number": "398",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"4TH FLOOR,SECURITY\""
+                },
+                {
+                    "Last Name": "3RD FLOOR",
+                    "First Name": "SECURITY",
+                    "Number": "399",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"3RD FLOOR,SECURITY\""
+                },
+                {
+                    "Last Name": "3RD FLOOR GYM",
+                    "First Name": "SECURITY",
+                    "Number": "400",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"3RD FLOOR GYM,SECURIT\""
+                },
+                {
+                    "Last Name": "2ND FLOOR EDD",
+                    "First Name": "SECURITY",
+                    "Number": "401",
+                    "Department": "DCS",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"2ND FLOOR EDD,SECURIT\""
+                },
+                {
+                    "Last Name": "KGOMOTSO",
+                    "First Name": "NKOMBA",
+                    "Number": "6203",
+                    "Department": "Research and Policy Development",
+                    "Location": "MTI-HQ",
+                    "Directory Name": "\"KGOMOTSO,NKOMBA\""
+                },
+                {
+                    "Last Name": "",
+                    "First Name": "Shawn IT",
+                    "Number": "999",
+                    "Department": "DCS",
+                    "Location": "MITI-HQ",
+                    "Directory Name": "Shawn IT"
+                }
+            ]
+
+
+            // Call function to create and populate the table
+            createTable(jsonData);
+
+            // Function to create and populate the table
+            function createTable(data) {
+                const tableBody = document.querySelector('#directoryTable tbody');
+
+                // Loop through the data and populate the table rows
+                data.forEach(entry => {
+                    const row = tableBody.insertRow();
+
+                    // Populate each cell in the row
+                    Object.values(entry).forEach(value => {
+                        const cell = row.insertCell();
+                        cell.textContent = value;
+                    });
+                });
+            }
+
+            // Search functionality
+            var searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function () {
+                var searchTerm = searchInput.value.toLowerCase();
+                filterTable(searchTerm);
+            });
+
+            function filterTable(searchTerm) {
+                var tableRows = document.querySelectorAll('#directoryTable tbody tr');
+
+                tableRows.forEach(function (row) {
+                    var rowText = row.textContent.toLowerCase();
+                    row.style.display = rowText.includes(searchTerm) ? '' : 'none';
+                });
+            }
+        });
+    </script>
+
+    <footer class="page-footer dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="About.html">About Us</a></li>
+                        <li><a href="Our Systems.html">Our Systems</a></li>
+                        <li><a href="Updates.html">Updates</a></li>
+                        <li><a href="Phonebook.html">Phonebook</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="Faqs.html">FAQs</a></li>
+                    </ul>
+                </div>
+            
+                <div class="col-sm-3">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <h6 style="color: #d2d1d1; text-decoration: underline;">CONTACTS</h6>
+                        <p style="color: #d2d1d1;"><i class="fa fa-phone" aria-hidden="true"></i> (+267) 3601200</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-envelope" aria-hidden="true"></i>  mitipru@gov.bw</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-map-marker" aria-hidden="true"></i> Plot 54380, CBD</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-map-marker" aria-hidden="true"></i> Gaborone, Botswana</p>
+                    </ul>
+                </div>
+
+                <div class="col-sm-3">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <h6 style="color: #d2d1d1; text-decoration: underline;">FOLLOW US ON</h6>
+                        <p><a href="#" target="_blank"><ion-icon name="logo-facebook" style="font-size: xx-large;"></ion-icon></a></p>
+                        <a href="#" target="_blank"><ion-icon name="logo-twitter" style="font-size: xx-large;"></ion-icon></a>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>Copyright &copy;
+                                <script>document.write(new Date().getFullYear())</script> Ministry of Trade and Industry | Designed by:<a style="color: #f8f9fa;hover { color: #0066cc; }" href="#" target="_blank">IT</a>
+        </p>
+            </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="assets/js/vanilla-zoom.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

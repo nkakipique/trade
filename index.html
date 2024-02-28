@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Ministry Of Trade and Investment</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+	<link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="path/to/ionic/css/ionic.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/cogwheels.css">
+    <script src="path/to/ionic/js/ionic.js"></script>
+    <script src="path/to/ionic/js/ionicons.js"></script>
+
+    <style>
+         /* Initially hide submenu */
+        .navbar-nav ul {
+          display: none;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+      
+        /* When parent li is hovered, show the submenu */
+        .navbar-nav li:hover ul {
+          display: block;
+        }
+      
+        /* Add some styling for the submenu */
+        .navbar-nav ul {
+          position: absolute;
+          background: #4a99c7;
+          border: 1px solid #ddd;
+          padding: 10px;
+        }
+      
+        .navbar-nav ul li {
+          margin-bottom: 5px;
+        }
+      
+        .navbar-nav ul a {
+          text-decoration: none;
+        }
+
+        .custom-btn {
+            background-color: transparent;
+            color: 176B87;
+            border: 2px solid #06151e;
+            padding: 10px 20px;
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 10px; /* Adjust the radius as needed */
+            margin-bottom: 20px;
+        }
+
+        .custom-btn:hover {
+            background-color: #4a99c7;
+            color: #ffffff; /* White text on hover */
+        }
+
+        /* CSS for slideshow container */
+        .masthead {
+          position: relative;
+          
+          background-size: cover;
+          background-position: center;
+        }
+    
+                /* CSS for animation 
+                @keyframes slideshow {
+                0% { background-image: url('assets/img/header-bg.png'); }
+                7% { background-image: url('assets/img/12.png'); }
+                14% { background-image: url('assets/img/2.png'); }
+                21% { background-image: url('assets/img/3.png'); }
+                28% { background-image: url('assets/img/14.png'); }
+                35% { background-image: url('assets/img/5.png'); }
+                42% { background-image: url('assets/img/6.png'); }
+                49% { background-image: url('assets/img/7.png'); }
+                56% { background-image: url('assets/img/8.png'); }
+                63% { background-image: url('assets/img/9.png'); }
+                70% { background-image: url('assets/img/10.png'); }
+                77% { background-image: url('assets/img/11.png'); }
+                84% { background-image: url('assets/img/12.png'); }
+                91% { background-image: url('assets/img/13.png'); }
+                100% { background-image: url('assets/img/header-bg.png'); }
+                }*/
+                @keyframes slideshow {
+                        0%    { background-image: url('assets/img/tech/DSC7.png');           animation-duration: 2s; animation-timing-function: ease-in; }
+                        /*28%   { background-image: url('assets/img/tech/t5.png');                  animation-duration: 2s; animation-timing-function: ease-in; }
+                        35%   { background-image: url('assets/img/tech/t6.png');                   animation-duration: 2s; animation-timing-function: ease-in; }
+                        42%   { background-image: url('assets/img/tech/t7.png');                   animation-duration: 2s; animation-timing-function: ease-in; }
+                        49%   { background-image: url('assets/img/tech/t8.png');                   animation-duration: 2s; animation-timing-function: ease-in; }
+                        56%   { background-image: url('assets/img/tech/t9.png');                   animation-duration: 2s; animation-timing-function: ease-in; }
+                        63%   { background-image: url('assets/img/tech/t10.png');                   animation-duration: 2s; animation-timing-function: ease-in; }
+                        70%   { background-image: url('assets/img/tech/t11.png');                  animation-duration: 2s; animation-timing-function: ease-in; }
+                        77%   { background-image: url('assets/img/tech/t12.png');                  animation-duration: 2s; animation-timing-function: ease-in; }
+                        84%   { background-image: url('assets/img/tech/t13.png');                  animation-duration: 2s; animation-timing-function: ease-in; }
+                        91%   { background-image: url('assets/img/tech/t14.png');                  animation-duration: 2s; animation-timing-function: ease-in; }
+                        100%  { background-image: url('assets/img/tech/t1.png');           animation-duration: 2s; animation-timing-function: ease-in; }*/
+                }
+            
+                /* Apply animation to the slideshow container */
+                .masthead {
+                animation: slideshow 60s infinite;
+                }
+                .slideshow-container .slideshow-image:not(.active) {
+                    display: none;
+                }
+      </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+        <div class="container"><a class="navbar-brand logo" href="#">
+            
+              </a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+              <div class="con">
+                <div class="loogo">
+                  <div class='loader' >
+                        <div class='loader_cogs' style="margin-top: 50%;">
+                            <div class='COGfirst'>
+                                <div class='firstPart'></div>
+                                <div class='firstPart'></div>
+                                <div class='firstPart'></div>
+                                <div class='firstHole'></div>
+                            </div>
+                    
+                            <div class='COGsecond'>
+                                <div class='secondPart'></div>
+                                <div class='secondPart'></div>
+                                <div class='secondPart'></div>
+                                <div class='secondHole'></div>
+                            </div>
+                    
+                            <div class='COGthird'>
+                                <div class='thirdPart'></div>
+                                <div class='thirdPart'></div>
+                                <div class='thirdPart'></div>
+                                <div class='thirdHole'></div>
+                            </div>
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <style>
+                  
+                /* New styles */
+                .con {
+                  position: absolute;
+                  top: -49px;
+                  left: 0;
+                  padding-left: 130px; /* Adjust the left padding as needed */
+                }
+    
+                .loogo {
+                  width: 70px;
+                  fill: #a8a8a7;
+                }   
+              </style>
+              <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link " href="About.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" >Our Systems</a>
+                        <ul>
+							<li class="nav-item"><a class="nav-link" href="Gabs.html">GABS</a></li>
+                            <li class="nav-item"><a class="nav-link" href="Kriss.html">KRISS</a></li>
+                            <li class="nav-item"><a class="nav-link" href="Mitimis.html">MITIMIS</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="Updates.html">Updates</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Phonebook.html">Phonebook</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="FAQs.html">FAQs</a></li>
+                    
+                  
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="page landing-page" >
+		<div class="masthead">
+            <section class="clean-block clean-hero" style="background-image:url(&quot;assets/img/tech/back.MP4&quot;);color:rgba(243, 243, 243, 0);">
+            
+                <div class="text" style="background-color: rgba(220, 233, 241, 0.8);">
+                   <h1 style="color: #0F1035;">Ministry of Trade & Industry</h1>
+                   <p style="color: #0F1035;">
+                    <b>The Ministry of Investment, Trade, and Industry is focused on creating a positive environment
+                        for investment, sustainable industries, and trade to foster economic diversification and growth.
+                        Its key objectives include promoting sustainable industries, diversifying the economy through 
+                        export development, attracting both foreign and domestic investments, generating wealth, fostering
+                        employment, empowering citizens economically, promoting entrepreneurship, and eradicating poverty.
+					</p>
+					<a href="About.html" >
+                        <button class="custom-btn" type="button" >Learn More</button>
+                    </a>
+                    
+                
+                </div>
+            </section>
+        </div>
+        <section class="clean-block clean-info dark" >
+            <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info" style="font-family: cursive">Welcome To Ministry Of Trade & Industry.</h2>
+                </div>
+                <div class="row align-items-center" style="background-color: #dce9f1;border-top: 6px solid #4a99c7;">
+                    <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/Mmusi.jpg"></div>
+                    <div class="col-md-6">
+                        <h3>Honorable Minister Mmusi Kgafela</h3>
+                        <div class="getting-started-info">
+                            <p>Mmusi Kgafela is the Member of Parliament for Mochudi West Constituency and 
+                                currently serves as the Honourable Minister of Trade and Industry in the 
+                                Corporate Services department. With a legal background holding a Bachelor of Laws, 
+                                he entered active national politics in 2017 through the Botswana Democratic Party. 
+                                Kgafela has a notable legal career as an Attorney of the High Court, 
+                                specializing in conveyancing and notary public services. 
+                                His political journey includes serving as the 
+                                Minister of Infrastructure and Housing Development from October 2019 to May 2021.</p>
+                        </div>
+						<a href="About.html" >
+                        	<button class="custom-btn" type="button" >Learn More</button>
+                    	</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="clean-block clean-pricing dark" >
+            <div class="container">
+                
+                <div class="row justify-content-center">
+                    <div class="col-md-5 col-lg-4" style="width: 50%;">
+                        <div class="clean-pricing-item" style="background-color: #dce9f1;">
+                            <div class="heading">
+                                <h3>Ass.Minister Beauty Manake</h3>
+                            </div>
+                           
+                            <img class="card card-img-top w-100 d-block" src="assets/img/scenery/beauty.png">
+                            <p>Hon. Beauty M. Manake, Botswana's Assistant Minister of Trade & Industry, 
+                                brings over 17 years of experience in trade and investment. 
+                                With degrees in Information Systems, Food and Agribusiness Management, 
+                                and an MBA in Agricultural Business and Marketing, 
+                                she started as a Systems Technologist before transitioning to agribusiness.
+                                <br> 
+                                A prominent figure in global forums, 
+                                she successfully campaigned for Botswana to host the 2023 IAGR, 
+                                setting a world attendance record. 
+                                Her diverse expertise in business development and CSR has contributed 
+                                significantly to Botswana's international investment reputation.</p>
+                            <div class="price">
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-lg-4" style="width: 50%;">
+                        <div class="clean-pricing-item" style="background-color: #dce9f1;">
+                            
+                            <div class="heading">
+                                <h3>PS Ellen Richard-Madisa</h3>
+                            </div>
+                            <img class="card card-img-top w-100 d-block" src="assets/img/scenery/ELLEN.jpg">
+                            <p>Ellen Richard-Madisa, the current Permanent Secretary in the
+                                Ministry of Trade and Industry, brings over three decades of experience. 
+                                Starting at the Bank of Botswana in 1991, 
+                                she progressed through key roles in finance and administration 
+                                within the Ministry of Finance and Development Planning.
+                                <br> 
+                                Her expertise includes financial sector regulation, procurement policy, 
+                                and anti-money laundering activities. With a Master's in Commerce in Economics, 
+                                she has been actively involved in various administrative boards for organizations 
+                                such as BITC, SEZA, Mineral Development Company Botswana, 
+                                and Debswana Diamond Company.</p>
+                            <div class="price">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <main class="page service-page">
+            <section class="clean-block clean-services dark" style="margin-top: -110px;margin-top: 0.1px;">
+                <div class="container" style="background-color: #fff;">
+                    <div class="block-heading">
+                        <h2 class="text-info" style="font-family: cursive">Our Parastatals</h2>
+                     </div>
+                    <div class="row" style="padding-top: 20px;">
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://www.botc.org.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/BOTC.png"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://www.bdc.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/BDC.png"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://www.bitc.co.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/BITC.png"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://www.seza.co.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/seza.png"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://bobstandards.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/BOBS.png"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="http://gamblingauthority.co.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/GAMBLING.png"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://www.competitionauthority.co.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/CCA.png"></div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://spedu.co.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/SPEDU.png"> </div>
+                            </a>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <a href="https://www.cipa.co.bw/" target="_blank">
+                                <div class="card"><img class="card-img-top w-100 d-block" src="assets/img/parastatals/CIPA.png"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <main class="page gallery-page">
+            <section class="clean-block clean-gallery dark" style="margin-top: -110px;">
+                <div class="container">
+                    <div class="block-heading">
+                        <h2 class="text-info" style="font-family: cursive">Memories</h2>
+                     </div>
+                    <div class="row" style="background-color: #dce9f1;">
+                        <div class="col-md-6 col-lg-4 item" style="padding-top: 20px;"><a class="lightbox" href="assets/img/scenery/teachers.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/teachers.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item" style="padding-top: 20px;"><a class="lightbox" href="assets/img/scenery/11.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/11.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item" style="padding-top: 20px;"><a class="lightbox" href="assets/img/scenery/12.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/12.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item"><a class="lightbox" href="assets/img/scenery/13.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/13.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item"><a class="lightbox" href="assets/img/scenery/14.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/14.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item"><a class="lightbox" href="assets/img/scenery/15.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/15.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item"><a class="lightbox" href="assets/img/scenery/16.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/16.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item"><a class="lightbox" href="assets/img/scenery/17.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/17.png"></a></div>
+                        <div class="col-md-6 col-lg-4 item"><a class="lightbox" href="assets/img/scenery/19.png"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/19.png"></a></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </main>
+    <footer class="page-footer dark" style="padding-left: 0; padding-right: 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="About.html">About Us</a></li>
+                        <li><a href="Our Systems.html">Our Systems</a></li>
+                        <li><a href="Updates.html">Updates</a></li>
+                        <li><a href="Phonebook.html">Phonebook</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="Faqs.html">FAQs</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-sm-3">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <h6 style="color: #d2d1d1; text-decoration: underline;">CONTACTS</h6>
+                        <p style="color: #d2d1d1;"><i class="fa fa-phone" aria-hidden="true"></i> (+267) 3601200</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-envelope" aria-hidden="true"></i>  mitipru@gov.bw</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-map-marker" aria-hidden="true"></i> Plot 54380, CBD</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-map-marker" aria-hidden="true"></i> Gaborone, Botswana</p>
+                    </ul>
+                </div>
+
+                <div class="col-sm-3">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <h6 style="color: #d2d1d1; text-decoration: underline;">FOLLOW US ON</h6>
+                        <p><a href="#" target="_blank"><ion-icon name="logo-facebook" style="font-size: xx-large;"></ion-icon></a></p>
+                        <a href="#" target="_blank"><ion-icon name="logo-twitter" style="font-size: xx-large;"></ion-icon></a>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>Copyright &copy;
+                                <script>document.write(new Date().getFullYear())</script> Ministry of Trade and Industry | Designed by:<a style="color: #f8f9fa;hover { color: #0066cc; }" href="#" target="_blank">IT</a>
+</p>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="assets/js/vanilla-zoom.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

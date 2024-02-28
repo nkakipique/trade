@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Mophato</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i&amp;display=swap">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+	<link rel="icon" href="assets/img/logo.png" type="image/png">
+    <link rel="shortcut icon" href="assets/img/logo.png" type="image/png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/cogwheels.css">
+    <style>
+
+        body {
+          height: 100vh;
+          overflow: scroll; /* Remove or modify this line */
+        }
+
+        /* Initially hide submenu */
+        .navbar-nav ul {
+          display: none;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+      
+        /* When parent li is hovered, show the submenu */
+        .navbar-nav li:hover ul {
+          display: block;
+        }
+      
+        /* Add some styling for the submenu */
+        .navbar-nav ul {
+          position: absolute;
+          background: #4a99c7;
+          border: 1px solid #ddd;
+          padding: 10px;
+        }
+      
+        .navbar-nav ul li {
+          margin-bottom: 5px;
+        }
+      
+        .navbar-nav ul a {
+          
+          text-decoration: none;
+        }
+
+        .more-info {
+            background-color: transparent;
+            color: 176B87;
+            border: 2px solid #06151e;
+            padding: 10px 20px;
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 10px; /* Adjust the radius as needed */
+            margin-bottom: 20px;
+        }
+
+        .more-info:hover {
+            background-color: #4a99c7;
+            color: #ffffff; /* White text on hover */
+        }
+
+        #close-dialog {
+            background-color: transparent;
+            color: 176B87;
+            border: 2px solid #06151e;
+            padding: 10px 20px;
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 10px; /* Adjust the radius as needed */
+            margin-bottom: 20px;
+        }
+
+        #close-dialog {
+            background-color: #4a99c7;
+            color: #ffffff; /* White text on hover */
+        }
+
+      
+      
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+      
+      main {
+        padding: 20px;
+      }
+      
+      section {
+        margin-bottom: 30px;
+      }
+      
+      h2 {
+        color: #0F1035 !important;
+        text-align: center;
+      }
+      #press-release-list {
+        display: flex; /* Use flexbox */
+        flex-wrap: wrap; /* Allow flex items to wrap */
+        justify-content: center; /* Center the flex items horizontally */
+      }
+      .card {
+        display: flex; /* Use flexbox */
+        flex-direction: column; /* Arrange content vertically */
+        align-items: center; /* Center content horizontally */
+        width: 300px;
+        background-color: #dce9f1;
+        border: 2px solid #0F1035 !important;
+        border-radius: 5px;
+        padding: 20px; /* Adjust padding as needed */
+        margin: 0 10px 20px; 
+        /*margin-bottom: 20px; /* Adjust margin as needed */
+      }
+      
+      .card img {
+        width: 100%;
+        max-width: 200px; /* Reduce the max-width to limit image size */
+        height: auto;
+        border-radius: 5px;
+      }
+      
+      .dialog {
+        display: none;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        border: 10px solid #fff;
+        border-radius: 10px; /* Add border radius */
+        padding: 20px;
+        z-index: 1000;
+        max-height: 80%;
+        overflow-y: auto;
+     }
+      </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
+        <div class="container"><a class="navbar-brand logo" href="index.html">
+          <div class="con">
+            <div class="loogo">
+              <div class='loader' >
+                <div class='loader_cogs' style="margin-top: 50%;">
+                      <div class='COGfirst'>
+                      <div class='firstPart'></div>
+                      <div class='firstPart'></div>
+                      <div class='firstPart'></div>
+                      <div class='firstHole'></div>
+                      </div>
+              
+                      <div class='COGsecond'>
+                      <div class='secondPart'></div>
+                      <div class='secondPart'></div>
+                      <div class='secondPart'></div>
+                      <div class='secondHole'></div>
+                      </div>
+              
+                      <div class='COGthird'>
+                          <div class='thirdPart'></div>
+                          <div class='thirdPart'></div>
+                          <div class='thirdPart'></div>
+                          <div class='thirdHole'></div>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <style>
+              
+            /* New styles */
+            .con {
+              position: absolute;
+              top: -49px;
+              left: 0;
+              padding-left: 130px; /* Adjust the left padding as needed */
+            }
+
+            .loogo {
+              width: 70px;
+              fill: #a8a8a7;
+            }   
+          </style></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link " href="About.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" >Our Systems</a>
+                        <ul>
+							<li class="nav-item"><a class="nav-link" href="Gabs.html">GABS</a></li>
+                            <li class="nav-item"><a class="nav-link" href="Kriss.html">KRISS</a></li>
+                            <li class="nav-item"><a class="nav-link" href="Mitimis.html">MITIMIS</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="Updates.html">Updates</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Phonebook.html">Phonebook</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="FAQs.html">FAQs</a></li>
+                    
+                  
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main style="padding-top: 90px;">
+        <section id="press-releases">
+          <h2>Recent News</h2>
+          <div id="press-release-list">
+            <!-- Press releases will be dynamically added here using JavaScript -->
+          </div>
+        </section>
+        
+      </main>
+      
+      <div id="dialog-box" class="dialog">
+        <!-- Dialog content will be dynamically added here using JavaScript -->
+        <button id="close-dialog" type="submit">Close</button>
+      </div>
+      
+      <script>
+        // JavaScript code
+        document.addEventListener('DOMContentLoaded', function() {
+          // Example press release data
+          const pressReleases = [
+          { 
+            title: 'Ministry of Trade and Industry', 
+            date: 'February 21, 2024', 
+            content: 'What is Lorem Ipsum? <br> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br> <br> It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 
+            imageUrl: 'https://cdn.pixabay.com/photo/2020/05/20/03/50/gears-5193383_1280.png' 
+          },
+          
+          { 
+            title: 'OFFER SUPPORT TO YOUTH LED POLICY DELIBERATIONS SUCH AS THE AFFIRMATIVE ACTION- SENABYE', 
+            date: 'February 20, 2024', 
+            content: 'The Ministry of Trade and Industry envisions developed partnership, inclusion and participation of youth in all issues that concern them.Senior manager Mr Jeremiah Senabye said this when addressing the youth Focal persons, strategy officers and procurement officers from both the ministry and its parastatals at the ongoing youth mainstreaming workshop.<br> <br> “We need to audit our Policies, Acts and strategies in order to review those that are anti-youth to enable youth to successfully benefit from them,” he said. <br> <br> Senabye highlighted that as part of Botswana’s economic growth, availability of opportunities for the youth should be prioritised in order for them to navigate through the entrepreneurship world. The mainstreaming is premised on the understanding that young people are not only subjects for whom various actions and activities are carried out; they are also agents and actors with whom programmes should be envisaged and implemented. <br> <br> He also encouraged support to be offered to the identified Focal people and work towards achieving success in mainstreaming youth issues such as unemployment among others. <br> <br> In conclusion, he encouraged attendees that in planning for their Departmental and Parastatal strategies they should factor youth empowerment, identify opportunities and also develop initiatives towards closing gaps.', 
+            imageUrl: 'https://scontent.fgbe3-1.fna.fbcdn.net/v/t39.30808-6/424868993_808934471274361_3641834952002191986_n.jpg?stp=dst-jpg_p600x600&_nc_cat=103&ccb=1-7&_nc_sid=3635dc&_nc_eui2=AeEW_Vrgv8O_U1NqnZrgRGIXUqPaEj3Iz_VSo9oSPcjP9UAF0DYGyuSla40m0meIzs-rUjWpD1krMNF7du5axgTe&_nc_ohc=wlqmc5cTUAoAX83pYHU&_nc_ht=scontent.fgbe3-1.fna&oh=00_AfA8IARXyiDL8munhNplYfyj1bmEzm9Mxad6koG3wtQ0qA&oe=65DBC36B' 
+          },
+          { 
+            title: 'Press Release 3', 
+            date: 'February 19, 2024', 
+            content: 'This is the content of press release 3.', 
+            imageUrl: 'https://cdn.pixabay.com/photo/2014/09/11/22/00/dock-441989_1280.jpg' 
+          },
+          { 
+            title: 'Press Release 4', 
+            date: 'February 25, 2024', 
+            content: 'This is the content of press release 3.', 
+            imageUrl: 'https://cdn.pixabay.com/photo/2016/11/24/07/41/idea-1855598_1280.jpg' 
+          },
+          { 
+            title: 'Press Release 4', 
+            date: 'April 10, 2024', 
+            content: 'This is the content of press release 3.', 
+            imageUrl: 'https://cdn.pixabay.com/photo/2015/03/02/00/23/botswana-655498_1280.png' 
+          },
+          { 
+            title: 'Press Release 4', 
+            date: 'June 02, 2024', 
+            content: 'This is the content of press release 3.', 
+            imageUrl: 'https://media.istockphoto.com/id/147257107/photo/dropping-coins.jpg?s=1024x1024&w=is&k=20&c=9D4_8p0jaewtjF-JIdkvW2GjN1YMg9vwW7se4LL64t8=' 
+          }
+          ];
+          
+          const pressReleaseList = document.getElementById('press-release-list');
+          
+          // Add press releases to the list
+          pressReleases.forEach(function(pressRelease, index) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.innerHTML = `
+            <img src="${pressRelease.imageUrl}" alt="${pressRelease.title}">
+            <h3>${pressRelease.title}</h3>
+            <p><strong>Date:</strong> ${pressRelease.date}</p>
+            <button class="more-info" data-index="${index}">More Info</button>
+            `;
+            pressReleaseList.appendChild(card);
+          });
+          
+          // Event listener for more info button
+          document.querySelectorAll('.more-info').forEach(button => {
+            button.addEventListener('click', function() {
+              const index = this.getAttribute('data-index');
+              const dialogContent = document.getElementById('dialog-box');
+              dialogContent.innerHTML = `
+              <h3>${pressReleases[index].title}</h3>
+              <p><strong>Date:</strong> ${pressReleases[index].date}</p>
+              <p>${pressReleases[index].content}</p>
+              <button id="close-dialog">Close</button>
+              `;
+              document.querySelector('.dialog').style.display = 'block';
+              
+              // Event listener for close dialog button
+              document.getElementById('close-dialog').addEventListener('click', function() {
+                document.querySelector('.dialog').style.display = 'none';
+              });
+            });
+          });
+        });
+      </script>
+    <footer class="page-footer dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="About.html">About Us</a></li>
+                        <li><a href="Our Systems.html">Our Systems</a></li>
+                        <li><a href="Updates.html">Updates</a></li>
+                        <li><a href="Phonebook.html">Phonebook</a></li>
+                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="Faqs.html">FAQs</a></li>
+                    </ul>
+                </div>
+               
+                <div class="col-sm-3">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <h6 style="color: #d2d1d1; text-decoration: underline;">CONTACTS</h6>
+                        <p style="color: #d2d1d1;"><i class="fa fa-phone" aria-hidden="true"></i> (+267) 3601200</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-envelope" aria-hidden="true"></i>  mitipru@gov.bw</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-map-marker" aria-hidden="true"></i> Plot 54380, CBD</p>
+                        <p style="color: #d2d1d1;"><i class="fa fa-map-marker" aria-hidden="true"></i> Gaborone, Botswana</p>
+                    </ul>
+                </div>
+
+                <div class="col-sm-3">
+                    <ul style="list-style-type: none; padding: 0;">
+                        <h6 style="color: #d2d1d1; text-decoration: underline;">FOLLOW US ON</h6>
+                        <p><a href="#" target="_blank"><ion-icon name="logo-facebook" style="font-size: xx-large;"></ion-icon></a></p>
+                        <a href="#" target="_blank"><ion-icon name="logo-twitter" style="font-size: xx-large;"></ion-icon></a>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <p>Copyright &copy;
+                                <script>document.write(new Date().getFullYear())</script> Ministry of Trade and Industry | Designed by:<a style="color: #f8f9fa;hover { color: #0066cc; }" href="#" target="_blank">IT</a>
+</p>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script src="assets/js/vanilla-zoom.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

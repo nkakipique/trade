@@ -1,0 +1,115 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+body {
+  height: 100vh;
+  overflow: scroll;
+}
+
+
+.loader {
+  height: 100%;
+  margin: auto;
+  width: 200px; /* Adjusted to a smaller size */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loader_cogs {
+  position: relative;
+  width: 50px; /* Adjusted to a smaller size */
+  height: 33px; /* Adjusted to a smaller size */
+  top: -40px !important; /* Adjusted for positioning */
+  margin: auto;
+}
+
+.COGfirst,
+.COGsecond,
+.COGthird {
+  position: absolute;
+  width: 33px; /* Adjusted to a smaller size */
+  height: 33px; /* Adjusted to a smaller size */
+  transform-origin: 16.5px 16.5px;
+}
+
+.COGfirst {
+  left: 0;
+  top: 0;
+  animation: rotate 10s infinite linear;
+}
+
+.COGsecond {
+  left: -33px; /* Adjusted to position on the lower left of COGfirst */
+  top: 20px; /* Adjusted for positioning */
+  transform: rotate(16deg);
+  animation: rotate_left 10s .1s infinite reverse linear;
+}
+
+.COGthird {
+  left: 33px; /* Adjusted to position on the lower right of COGfirst */
+  top: 20px; /* Adjusted for positioning */
+  transform: rotate(4deg);
+  animation: rotate_left 10.2s .4s infinite linear;
+}
+
+.COGfirst div:nth-of-type(1),
+.COGsecond div:nth-of-type(1),
+.COGthird div:nth-of-type(1) {
+  transform: rotate(30deg);
+}
+
+.COGfirst div:nth-of-type(2),
+.COGsecond div:nth-of-type(2),
+.COGthird div:nth-of-type(2) {
+  transform: rotate(60deg);
+}
+
+.COGfirst div:nth-of-type(3),
+.COGsecond div:nth-of-type(3),
+.COGthird div:nth-of-type(3) {
+  transform: rotate(90deg);
+}
+
+.COGfirst div.firstPart,
+.COGsecond div.secondPart,
+.COGthird div.thirdPart {
+  width: 33px; /* Adjusted to a smaller size */
+  border-radius: 5px; /* Adjusted for a smaller radius */
+  position: absolute;
+  height: 33px; /* Adjusted to a smaller size */
+  background: #a8a8a7;
+}
+
+.COGfirst div.firstHole,
+.COGsecond div.secondHole,
+.COGthird div.thirdHole {
+  width: 16.5px; /* Adjusted to a smaller size */
+  height: 16.5px; /* Adjusted to a smaller size */
+  border-radius: 50%;
+  background: #4a99c7;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate_left {
+  from {
+    transform: rotate(16deg);
+  }
+  to {
+    transform: rotate(376deg);
+  }
+}
